@@ -209,3 +209,172 @@ console.log(dataNullish);
 // Pakai Nullish Coalescing Operator (??)
 dataNullish = parameter ?? 'Nilai Default';
 console.log(dataNullish);
+
+// ========Optional Chaining============
+const persons = {};
+
+let country; //tidak ada data
+
+// console.log(`Data ${country}`);
+// console.log("Sukses");
+
+//===== Pengecekan
+// if (persons.address !== undefined && persons.address !== null){
+//   country = persons.address.country;
+// };
+// console.log(`Data ${country}`);
+
+//====== cara singkat (optional chaining)
+let countrys = persons?.adress?.country;
+console.log(`Data ${country}`);
+
+// ==========Fa;sy dan Truthy=============
+const datas = 'false';
+if (datas) {
+  console.log('TRUTHY');
+} else {
+  console.log('FALSY');
+}
+
+// ============Operator logika di Non Boolean============
+// or(||)= mengambil yg pertama yg truthy
+console.log('Hello Truthy' || '');
+console.log('' || []);
+console.log('0' || 'NOL'); //diambil yg pertama
+console.log(0 || 'NOL');
+console.log(null || 'NULL');
+console.log(undefined || 'UNDEFINED');
+console.log(0 || false); //kalau keduanya falsy yg diambil falsy yg terakhir
+
+const orang = {
+  firstNames: '',
+  lastNames: 'Ginanjar',
+};
+const names = orang.firstNames || orang.lastNames;
+console.log(names);
+
+// and(&&)= mengambil yg pertama yg falsy
+console.log('Hello falsy' && '');
+console.log('' && []);
+console.log('0' && 'NOL'); //diambil yg terakhir
+console.log(0 && 'NOL');
+console.log(null && 'NULL');
+console.log(undefined && 'UNDEFINED');
+console.log(0 && false); //kalau keduanya falsy yg diambil yg pertama
+
+// ============For Loop=============
+// cara 1
+let counter = 1;
+for (; counter <= 5; ) {
+  console.log(`Perulangan ke ${counter}`);
+  counter++;
+}
+
+// cara 2
+for (let counter2 = 1; counter2 <= 5; counter2++) {
+  console.log(`Perulangan ke ${counter2}`);
+}
+
+// ===============While Loop===========
+let counter3 = 1; //kalau diganti 100 tidak akan muncul
+while (counter3 <= 5) {
+  console.log(`Perulangan While ke ${counter3}`);
+  counter3++;
+}
+
+// ==========Do While Loop=============
+let counter4 = 1; //kalau diganti 100 akan muncul "Do While ke 100"
+do {
+  console.log(`Do While ke ${counter4}`);
+  counter4++;
+} while (counter4 <= 5);
+
+// ============Break & Continue=========
+// Break
+let counter5 = 1;
+
+while (true) {
+  console.log(`Break ${counter5}`);
+  counter5++;
+
+  if (counter5 > 5) {
+    break; //apabila kondisi lebih dari true maka break (berhenti total)
+  }
+}
+
+// Continue
+for (counter6 = 1; counter6 <= 10; counter6++) {
+  if (counter6 % 2 === 1) {
+    continue; //Kondisinya dilewat atau tidak di tampilkan
+  }
+  console.log(`Angka Genap ${counter6}`);
+}
+
+// Label
+loopi: for (let i = 1; i < 5; i++) {
+  //Loop i
+  loopj: for (let j = 1; j <= 10; j++) {
+    //Loop j
+    if (j > 10) {
+      //apabila j lebih besar dari 10 maka
+      continue loopi; //lakukan loop i
+    }
+    console.log(`${i} - ${j}`);
+  }
+}
+
+// ==============For In (direkomendasikan untuk object)=============
+//dari object
+const warga = {
+  firstName: 'Gingin',
+  lastName: 'Ginanjar',
+};
+
+for (const property in warga) {
+  // Iterasi terhadap property atau index
+  document.writeln(`<p>${property} : ${warga[property]}</p>`);
+}
+
+//dari array
+const warga2 = ['Agus', 'Zafira', 'Syania'];
+for (const indek in warga2) {
+  document.writeln(`<p>${indek} : ${warga2[indek]}</p>`);
+}
+
+// =============For Of (hanya untuk array)=============
+const warga3 = ['Gingin', 'Ginanjar', 'Tiara'];
+for (const index of warga3) {
+  document.writeln(`<p>${index}</p>`);
+}
+
+const spell = 'TIARA';
+for (const indexx of spell) {
+  document.writeln(`<p>${indexx}</p>`);
+}
+
+//coba dari object
+// const ofObject = {
+//   nama : "Gingin",
+//   alamat : "Karangpaningal"
+// };
+
+// for (const coba of ofObject){
+//   document.writeln(`<p>${coba}</p>`)
+// };  //==========Error Guys karena tidak Itterable=======
+
+// ==========With Statement (tidak direkomendasikan karana ambigu)=============
+//cara biasa
+const pelanggan = {
+  nama: 'Asep',
+  alamat: 'Cikadal',
+};
+
+console.log(pelanggan.nama);
+console.log(pelanggan.alamat);
+
+//pakai with statement
+
+with (pelanggan) {
+  console.log(nama);
+  console.log(alamat);
+}
