@@ -378,3 +378,64 @@ with (pelanggan) {
   console.log(nama);
   console.log(alamat);
 }
+
+// =============Function================
+function sayHello() {
+  document.write('<p>Hello Function</p>');
+}
+
+sayHello();
+sayHello();
+
+// =============Function Parameter============
+function perkalian(angkaPertama, angkaKedua) {
+  const hasil = angkaPertama * angkaKedua;
+  document.writeln(`${angkaPertama} x ${angkaKedua} = ${hasil}`);
+}
+
+perkalian(3, 3);
+
+// ==============Function Return Value============
+//membuat funtion dengan parameter dan return value
+function pembagian(a, b) {
+  const c = a / b;
+  return c;
+}
+//memanggil function dan nmenangkap return value nya
+const hasilBagi = pembagian(6, 2);
+document.writeln(`<p>a : b = ${hasilBagi}</p>`);
+
+//contoh lain penggunaan return
+function getFinalScore(value) {
+  if (value >= 90) { //apabila kondisi true
+    return 'Nilai A'; //maka ini yg muncul dan return ke atas(tidak lanjut)
+  } else if (value >= 80) {
+    return 'Nilai B';
+  } else if (value >= 70) {
+    return 'Nilai C';
+  } else if (value >= 60) {
+    return 'Nilai D';
+  } else {
+    return 'Nilai C';
+  }
+}
+//ditangkap di variable
+const finalValue = getFinalScore(83);
+document.writeln(`<p>${finalValue}</p>`);
+
+//contoh lain
+function isContains(array, searchValue){
+  for (const element of array) {
+    console.log(`itterasi element ${element}`)//lihat di console
+    if (element === searchValue){
+      return true;
+    }
+  }
+  return false;
+}
+//masukan data dulu
+const array =[10,24,54,76,3,234,435,6,34];
+const search = 76;
+//tangkap dengan variable
+const found = isContains(array, search);
+document.writeln(`<p>apakah data ditemukan : ${found}</p>`);
