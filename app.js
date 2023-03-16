@@ -439,3 +439,64 @@ const search = 76;
 //tangkap dengan variable
 const found = isContains(array, search);
 document.writeln(`<p>apakah data ditemukan : ${found}</p>`);
+
+// ============Function Optional Parameter=============
+function sayHalo(FirstName, MiddleName, LastName){
+  console.log(FirstName);
+  console.log(MiddleName);
+  console.log(LastName);
+}
+
+sayHalo();
+sayHalo('Gingin'); //Gingin, Undefined, Undefined
+sayHalo('Gingin','Ginanjar'); //Gingin, Ginanjar, Undefined
+sayHalo('Gingin','Ginanjar','Jaeger'); //Gingin, Ginanjar, Jaeger
+sayHalo('Gingin','Ginanjar','Jaeger','Junior'); //Gingin, Ginanjar, Jaeger
+
+// ==============Default Parameter==========
+function register(name, gender = "UNKNOWN"){
+  console.log(name);
+  console.log(gender);
+}
+
+register(); //undefined, UNKNOWN
+register("Gingin"); //Gingin, UNKNOWN
+register("Gingin","MALE"); //Gingin, MALE
+register("Gingin",undefined); //Gingin, UNKNOWN
+register("Gingin",null); //Gingin, null
+
+// =================Rest Parameter============
+function sumBuah (name, ...data){
+  let totalBuah = 0;
+  for (const item of data) {
+    totalBuah += item;
+  }
+  document.writeln(`<p> Total ${name} Adalah ${totalBuah}</p>`)
+}
+
+sumBuah("Orange",3,5,7,4,8,9);
+sumBuah("Apple",3,5,5,4,4,1);
+sumBuah("Banana",1,2,8,2,3,4);
+
+// Spread Syntax
+const values = [10,10,10,10,10,];
+sumBuah("Peach", values); //Total Peach Adalah 010,10,10,10,10
+sumBuah("Grape", ...values); //Total Grape Adalah 50
+
+// ===========Function sebagai Value============
+function katakanHalo(name){
+  document.writeln(`<p>Halo ${name}</p>`)
+}
+
+katakanHalo("Gingin");
+//function jadi value
+const say = katakanHalo;
+say("Ginanjar");
+
+//function di parameter
+function giveMeName(callback){
+  callback("Asep");
+}
+
+giveMeName(katakanHalo);
+giveMeName(say);
