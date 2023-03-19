@@ -407,7 +407,8 @@ document.writeln(`<p>a : b = ${hasilBagi}</p>`);
 
 //contoh lain penggunaan return
 function getFinalScore(value) {
-  if (value >= 90) { //apabila kondisi true
+  if (value >= 90) {
+    //apabila kondisi true
     return 'Nilai A'; //maka ini yg muncul dan return ke atas(tidak lanjut)
   } else if (value >= 80) {
     return 'Nilai B';
@@ -424,24 +425,24 @@ const finalValue = getFinalScore(83);
 document.writeln(`<p>${finalValue}</p>`);
 
 //contoh lain
-function isContains(array, searchValue){
+function isContains(array, searchValue) {
   for (const element of array) {
-    console.log(`itterasi element ${element}`)//lihat di console
-    if (element === searchValue){
+    console.log(`itterasi element ${element}`); //lihat di console
+    if (element === searchValue) {
       return true;
     }
   }
   return false;
 }
 //masukan data dulu
-const array =[10,24,54,76,3,234,435,6,34];
+const array = [10, 24, 54, 76, 3, 234, 435, 6, 34];
 const search = 76;
 //tangkap dengan variable
 const found = isContains(array, search);
 document.writeln(`<p>apakah data ditemukan : ${found}</p>`);
 
 // ============Function Optional Parameter=============
-function sayHalo(FirstName, MiddleName, LastName){
+function sayHalo(FirstName, MiddleName, LastName) {
   console.log(FirstName);
   console.log(MiddleName);
   console.log(LastName);
@@ -449,54 +450,127 @@ function sayHalo(FirstName, MiddleName, LastName){
 
 sayHalo();
 sayHalo('Gingin'); //Gingin, Undefined, Undefined
-sayHalo('Gingin','Ginanjar'); //Gingin, Ginanjar, Undefined
-sayHalo('Gingin','Ginanjar','Jaeger'); //Gingin, Ginanjar, Jaeger
-sayHalo('Gingin','Ginanjar','Jaeger','Junior'); //Gingin, Ginanjar, Jaeger
+sayHalo('Gingin', 'Ginanjar'); //Gingin, Ginanjar, Undefined
+sayHalo('Gingin', 'Ginanjar', 'Jaeger'); //Gingin, Ginanjar, Jaeger
+sayHalo('Gingin', 'Ginanjar', 'Jaeger', 'Junior'); //Gingin, Ginanjar, Jaeger
 
 // ==============Default Parameter==========
-function register(name, gender = "UNKNOWN"){
+function register(name, gender = 'UNKNOWN') {
   console.log(name);
   console.log(gender);
 }
 
 register(); //undefined, UNKNOWN
-register("Gingin"); //Gingin, UNKNOWN
-register("Gingin","MALE"); //Gingin, MALE
-register("Gingin",undefined); //Gingin, UNKNOWN
-register("Gingin",null); //Gingin, null
+register('Gingin'); //Gingin, UNKNOWN
+register('Gingin', 'MALE'); //Gingin, MALE
+register('Gingin', undefined); //Gingin, UNKNOWN
+register('Gingin', null); //Gingin, null
 
 // =================Rest Parameter============
-function sumBuah (name, ...data){
+function sumBuah(name, ...data) {
   let totalBuah = 0;
   for (const item of data) {
     totalBuah += item;
   }
-  document.writeln(`<p> Total ${name} Adalah ${totalBuah}</p>`)
+  document.writeln(`<p> Total ${name} Adalah ${totalBuah}</p>`);
 }
 
-sumBuah("Orange",3,5,7,4,8,9);
-sumBuah("Apple",3,5,5,4,4,1);
-sumBuah("Banana",1,2,8,2,3,4);
+sumBuah('Orange', 3, 5, 7, 4, 8, 9);
+sumBuah('Apple', 3, 5, 5, 4, 4, 1);
+sumBuah('Banana', 1, 2, 8, 2, 3, 4);
 
 // Spread Syntax
-const values = [10,10,10,10,10,];
-sumBuah("Peach", values); //Total Peach Adalah 010,10,10,10,10
-sumBuah("Grape", ...values); //Total Grape Adalah 50
+const values = [10, 10, 10, 10, 10];
+sumBuah('Peach', values); //Total Peach Adalah 010,10,10,10,10
+sumBuah('Grape', ...values); //Total Grape Adalah 50
 
 // ===========Function sebagai Value============
-function katakanHalo(name){
-  document.writeln(`<p>Halo ${name}</p>`)
+function katakanHalo(name) {
+  document.writeln(`<p>Halo ${name}</p>`);
 }
 
-katakanHalo("Gingin");
+katakanHalo('Gingin');
 //function jadi value
 const say = katakanHalo;
-say("Ginanjar");
+say('Ginanjar');
 
 //function di parameter
-function giveMeName(callback){
-  callback("Asep");
+function giveMeName(callback) {
+  callback('Asep'); //sayHalo("Asep")
 }
 
 giveMeName(katakanHalo);
-giveMeName(say);
+giveMeName(say); //giveMeName(karakanHalo)
+
+// =================Anonymous Function==============
+//dimasukan ke variable
+const Say = function (name2) {
+  document.writeln(`<p>Hello ${name2}</p>`);
+};
+
+Say('Anonymous');
+
+//Dimasukan ke Parameter
+function giveMeNames(Callback) {
+  Callback('Anonymous');
+}
+
+giveMeNames(function (name3) {
+  document.writeln(`<p>Hi ${name3}</p>`);
+});
+
+//================Nested Function=================
+//Inner function(function di dalam)
+function outer() {
+  function inner() {
+    console.log("inner")
+  }
+
+  inner();
+  inner();
+}
+//inner(); //tidak bisa dipanggil diluar outer
+outer();
+
+//===============Scope============
+//Global Scope (Bisa diakses di Local)
+let firstVariable = "Global Scope";
+
+function first(){
+  console.log(firstVariable); // bisa diakses karena global
+  // local scope hitMe
+  let secondVariable = "Local Scope";
+};
+
+function second(){
+console.log(secondVariable) // tidak bisa diakses karena local
+};
+
+first();
+// second(); //error
+
+//==============Recursive Function (Memanggil dirinya sendiri)==============
+// contoh factorial menggunakan perulangan
+function factorial(value){
+let factori =1;
+for (let index = 1; index <= value; index++) {
+  factori *= index;
+}
+return factori;
+};
+
+console.info(factorial(5));
+console.info(1*2*3*4*5);//pembanding
+
+// factorial menggunakan recursive
+function factorialRecursive(value){
+if (value === 1) { // jika value 1 maka
+  return 1; // kembali ke 1
+}else{ //jika tidak
+  return value * factorialRecursive(value - 1); //maka value * (value - 1)
+}
+}
+
+console.info(`Recursive ${factorialRecursive(5)}`);
+
+//==============
