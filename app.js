@@ -523,7 +523,7 @@ giveMeNames(function (name3) {
 //Inner function(function di dalam)
 function outer() {
   function inner() {
-    console.log("inner")
+    console.log('inner');
   }
 
   inner();
@@ -534,43 +534,112 @@ outer();
 
 //===============Scope============
 //Global Scope (Bisa diakses di Local)
-let firstVariable = "Global Scope";
+let firstVariable = 'Global Scope';
 
-function first(){
+function first() {
   console.log(firstVariable); // bisa diakses karena global
   // local scope hitMe
-  let secondVariable = "Local Scope";
-};
+  let secondVariable = 'Local Scope';
+}
 
-function second(){
-console.log(secondVariable) // tidak bisa diakses karena local
-};
+function second() {
+  console.log(secondVariable); // tidak bisa diakses karena local
+}
 
 first();
 // second(); //error
 
 //==============Recursive Function (Memanggil dirinya sendiri)==============
 // contoh factorial menggunakan perulangan
-function factorial(value){
-let factori =1;
-for (let index = 1; index <= value; index++) {
-  factori *= index;
+function factorial(value) {
+  let factori = 1;
+  for (let index = 1; index <= value; index++) {
+    factori *= index;
+  }
+  return factori;
 }
-return factori;
-};
 
 console.info(factorial(5));
-console.info(1*2*3*4*5);//pembanding
+console.info(1 * 2 * 3 * 4 * 5); //pembanding
 
 // factorial menggunakan recursive
-function factorialRecursive(value){
-if (value === 1) { // jika value 1 maka
-  return 1; // kembali ke 1
-}else{ //jika tidak
-  return value * factorialRecursive(value - 1); //maka value * (value - 1)
-}
+function factorialRecursive(value) {
+  if (value === 1) {
+    // jika value 1 maka
+    return 1; // kembali ke 1
+  } else {
+    //jika tidak
+    return value * factorialRecursive(value - 1); //maka value * (value - 1)
+  }
 }
 
 console.info(`Recursive ${factorialRecursive(5)}`);
 
-//==============
+//==============Function Generator * =============
+function* createNames() {
+  yield 'Function';
+  yield 'Generator';
+}
+
+const namess = createNames();
+for (const namesss of namess) {
+  console.log(namesss);
+}
+
+// Data Generator but ganjil
+// Lazy (Dibuat satu-satu)
+function* buatGanjil(value) {
+  for (let i = 0; i <= value; i++) {
+    if (i % 2 === 1) {
+      console.info(`Yield Ke ${i}`); // untuk melihat lazy
+      yield i;
+    }
+  }
+}
+
+const numbers = buatGanjil(50);
+// for (const number of numbers) {
+//   console.log(number);
+// }
+console.info(numbers.next().value); // next() = function generator
+console.info(numbers.next().value);
+
+//=================Arrow Function=================
+// contoh pertama
+const sampurasun = (name) => {
+  const say = `Sampurasun ${name}`;
+  console.info(say);
+};
+
+sampurasun('Arrow');
+
+// Contoh tanpa blok (kalau isinya sederhana)
+const sampurasun2 = (name) => console.info(`Sampurasun ${name}`);
+
+sampurasun2('Arrow tanpa blok');
+
+// Contoh return value
+const sums = (first, second) => {
+  return first + second;
+};
+
+console.info(sums(100, 100));
+
+// Contoh tanpa return
+const sums2 = (first, second) => first + second;
+
+console.info(sums2(100, 100));
+
+// contoh tanpa kurung (apabila parameter 1)
+const sampurasun3 = (name) => console.info(`Sampurasun ${name}`);
+
+sampurasun2('Arrow tanpa kurung');
+
+// Contoh sebagai parameter
+function giveMeNama(callback) {
+  callback('Arrow parameter');
+}
+
+giveMeNama((name) => console.info(`Hello ${name}`));
+
+//====================Closure (scop local jadi global)==================
